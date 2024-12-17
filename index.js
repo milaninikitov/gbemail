@@ -17,8 +17,8 @@ app.post('/', (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD,
+              user: process.env.EMAIL, // Gmail потребителско име от .env
+        pass: process.env.EMAIL_PASSWORD, // Gmail парола от .env
     },
   });
 
