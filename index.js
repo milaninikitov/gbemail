@@ -11,14 +11,14 @@ app.post('/', (req, res) => {
   const { to, subject, text } = req.body;
 
   if (!to || !subject || !text) {
-    return res.status(400).json({ error: 'Missing required fields' });
+    return res.status(400).json({ error: 'Липсва задължително поле' });
   }
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-              user: process.env.EMAIL, // Gmail потребителско име от .env
-        pass: process.env.EMAIL_PASSWORD, // Gmail парола от .env
+              user: process.env.EMAIL, 
+        pass: process.env.EMAIL_PASSWORD, 
     },
   });
 
@@ -33,8 +33,8 @@ app.post('/', (req, res) => {
     if (error) {
       return res.status(500).json({ error: error.message });
     }
-    res.status(200).json({ message: 'Email sent: ' + info.response });
+    res.status(200).json({ message: 'Имейлът е изпратен: ' + info.response });
   });
 });
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Сървър с работещ на порт ${PORT}`));
