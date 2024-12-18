@@ -8,8 +8,16 @@ const app = express();
 const PORT = 10000;
 
 // Middleware
+const allowedDomains = ['https://globalbeauty.bg', 'https://whitebox.pro'];
+
 app.use(cors({
-  origin: 'https://globalbeauty.bg', // Разрешава заявки само от този домейн
+  origin: (origin, callback) => {
+    if (!origin || allowedDomains.includes(origin)) {
+      callback(null, true); // Разрешаваме заявката
+    } else {
+      callback(new Error('Not allowed by CORS')); // Блокираме заявката
+    }
+  },
   methods: ['POST'], // Разрешени HTTP методи
   allowedHeaders: ['Content-Type', 'Authorization'], // Разрешени заглавия
 }));
