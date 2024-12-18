@@ -8,7 +8,12 @@ const app = express();
 const PORT = 10000;
 
 // Middleware
-app.use(cors()); // Разрешава CORS заявките
+app.use(cors({
+  origin: 'https://globalbeauty.bg', // Разрешава заявки само от този домейн
+  methods: ['POST'], // Разрешени HTTP методи
+  allowedHeaders: ['Content-Type', 'Authorization'], // Разрешени заглавия
+}));
+
 app.use(bodyParser.json()); // Парсира JSON тялото на заявките
 
 app.post('/', (req, res) => {
